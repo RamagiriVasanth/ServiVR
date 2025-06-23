@@ -29,7 +29,7 @@ function BookingForm({ preselect = {} }) {
   // Fetch categories on mount
   useEffect(() => {
     setLoadingCategories(true);
-    fetch('https://servivr.onrender.com/api/categories')
+    fetch(`${process.env.REACT_APP_API_BASE_URL}/api/categories`)
       .then(res => res.json())
       .then(data => {
         setCategories(data);
@@ -61,7 +61,7 @@ function BookingForm({ preselect = {} }) {
     }
 
     setLoadingServices(true);
-    fetch(`https://servivr.onrender.com/api/services?category=${encodeURIComponent(selectedCategory)}`)
+    fetch(`${process.env.REACT_APP_API_BASE_URL}/api/services?category=${encodeURIComponent(selectedCategory)}`)
       .then(res => res.json())
       .then(data => {
         setServices(data);

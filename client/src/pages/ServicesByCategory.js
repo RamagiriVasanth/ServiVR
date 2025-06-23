@@ -24,7 +24,7 @@ function ServicesByCategory() {
     setLoading(true);
     setError(null);
 
-    fetch(`https://servivr.onrender.com/api/services?category=${encodeURIComponent(category)}`)
+    fetch(`${process.env.REACT_APP_API_BASE_URL}/api/services?category=${encodeURIComponent(category)}`)
       .then(res => {
         if (!res.ok) throw new Error('Failed to fetch services');
         return res.json();
@@ -49,7 +49,7 @@ function ServicesByCategory() {
     setLoadingSubcat(true);
     try {
       const res = await fetch(
-        `http://https://servivr.onrender.com/api/services?category=${encodeURIComponent(category)}&subcategory=${encodeURIComponent(subcatName)}`);
+        `${process.env.REACT_APP_API_BASE_URL}/api/services?category=${encodeURIComponent(category)}&subcategory=${encodeURIComponent(subcatName)}`);
       if (!res.ok) throw new Error('Failed fetching subcategory services');
       const data = await res.json();
 
@@ -128,7 +128,7 @@ function ServicesByCategory() {
         </div>
       )}
 
-      {displayedServices.length > 0 ? (
+      {displayedServices.length > 0 && (
         <ul className="service-list" style={{ padding: 0 }}>
           {displayedServices.map(service => {
             const key = service._id || service.name;
@@ -156,8 +156,6 @@ function ServicesByCategory() {
             );
           })}
         </ul>
-      ) : (
-        <p>No services available in this category.</p>
       )}
 
       <Link

@@ -20,7 +20,7 @@ function Home() {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetch(fetch('https://servivr.onrender.com/api/categories'))
+    fetch(`${process.env.REACT_APP_API_BASE_URL}/api/categories`)
       .then(res => {
         if (!res.ok) throw new Error('Failed to fetch categories');
         return res.json();

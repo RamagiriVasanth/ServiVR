@@ -23,7 +23,7 @@ const Register = () => {
     e.preventDefault();
 
     try {
-      const res = await fetch('http://https://servivr.onrender.com/api/auth/register', {
+      const res = await fetch(`${process.env.REACT_APP_API_BASE_URL}/api/auth/register`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData)
