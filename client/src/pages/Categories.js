@@ -9,7 +9,7 @@ function Categories() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch('http://localhost:5000/api/categories')
+    fetch(fetch('https://servivr.onrender.com/api/categories'))
       .then(res => {
         if (!res.ok) throw new Error('Failed to fetch categories');
         return res.json();

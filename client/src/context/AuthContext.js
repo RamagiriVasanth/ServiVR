@@ -62,7 +62,7 @@ const AuthProvider = ({ children }) => {
   // ✅ Use backend demo route instead of fake token
   const demoLogin = async () => {
     try {
-      const res = await fetch('http://localhost:5000/api/auth/demo-login', {
+      const res = await fetch('https://servivr.onrender.com/api/auth/demo-login', {
         method: 'POST',
       });
 

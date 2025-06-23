@@ -24,7 +24,7 @@ function ServicesByCategory() {
     setLoading(true);
     setError(null);
 
-    fetch(`http://localhost:5000/api/services?category=${encodeURIComponent(category)}`)
+    fetch(`http://https://servivr.onrender.com/api/services?category=${encodeURIComponent(category)}`)
       .then(res => {
         if (!res.ok) throw new Error('Failed to fetch services');
         return res.json();
@@ -49,8 +49,7 @@ function ServicesByCategory() {
     setLoadingSubcat(true);
     try {
       const res = await fetch(
-        `http://localhost:5000/api/services?category=${encodeURIComponent(category)}&subcategory=${encodeURIComponent(subcatName)}`
-      );
+        `http://https://servivr.onrender.com/api/services?category=${encodeURIComponent(category)}&subcategory=${encodeURIComponent(subcatName)}`);
       if (!res.ok) throw new Error('Failed fetching subcategory services');
       const data = await res.json();
 
