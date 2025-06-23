@@ -24,7 +24,7 @@ function ServicesByCategory() {
     setLoading(true);
     setError(null);
 
-    fetch(`http://https://servivr.onrender.com/api/services?category=${encodeURIComponent(category)}`)
+    fetch(`https://servivr.onrender.com/api/services?category=${encodeURIComponent(category)}`)
       .then(res => {
         if (!res.ok) throw new Error('Failed to fetch services');
         return res.json();
