@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import Register from './components/Register';
 import Login from './components/Login';
@@ -16,61 +16,86 @@ import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   const { user, logout } = useContext(AuthContext);
-  const [menuOpen, setMenuOpen] = useState(false);
-
-  // Close menu on link click (for better UX)
-  const handleLinkClick = () => {
-    if (menuOpen) setMenuOpen(false);
-  };
 
   return (
     <Router>
-      <nav className="navbar">
-        <div className="navbar-left">
-          <Link to="/" className="nav-logo" onClick={handleLinkClick}>
+      <nav
+        style={{
+          padding: '1rem 2rem',
+          background: '#2c3e50',
+          color: '#fff',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          flexWrap: 'wrap',
+        }}
+      >
+        <div>
+          <Link
+            to="/"
+            style={{
+              marginRight: '1.5rem',
+              color: '#ecf0f1',
+              textDecoration: 'none',
+              fontWeight: 'bold',
+              fontSize: '1.2rem',
+            }}
+          >
             ServiVR
           </Link>
-          <div className={`nav-links ${menuOpen ? 'open' : ''}`}>
-            <Link to="/" onClick={handleLinkClick}>
-              Home
+          <Link
+            to="/"
+            style={{ marginRight: '1rem', color: '#bdc3c7', textDecoration: 'none' }}
+          >
+            Home
+          </Link>
+          <Link
+            to="/categories"
+            style={{ marginRight: '1rem', color: '#bdc3c7', textDecoration: 'none' }}
+          >
+            Categories
+          </Link>
+          {user && (
+            <Link
+              to="/dashboard"
+              style={{ marginRight: '1rem', color: '#bdc3c7', textDecoration: 'none' }}
+            >
+              Dashboard
             </Link>
-            <Link to="/categories" onClick={handleLinkClick}>
-              Categories
-            </Link>
-            {user && (
-              <Link to="/dashboard" onClick={handleLinkClick}>
-                Dashboard
-              </Link>
-            )}
-          </div>
+          )}
         </div>
 
-        <div className="navbar-right">
+        <div>
           {user ? (
             <>
-              <span className="greeting">👋 Hi, {user.name}</span>
-              <button className="btn-logout" onClick={logout}>
+              <span style={{ marginRight: '1rem' }}>👋 Hi, {user.name}</span>
+              <button
+                onClick={logout}
+                style={{
+                  backgroundColor: '#e74c3c',
+                  border: 'none',
+                  color: '#fff',
+                  padding: '0.4rem 1rem',
+                  borderRadius: '4px',
+                  cursor: 'pointer',
+                }}
+              >
                 Logout
               </button>
             </>
           ) : (
-            <div className={`nav-auth-links ${menuOpen ? 'open' : ''}`}>
-              <Link to="/register" onClick={handleLinkClick}>
+            <>
+              <Link
+                to="/register"
+                style={{ marginRight: '1rem', color: '#bdc3c7', textDecoration: 'none' }}
+              >
                 Register
               </Link>
-              <Link to="/login" onClick={handleLinkClick}>
+              <Link to="/login" style={{ color: '#bdc3c7', textDecoration: 'none' }}>
                 Login
               </Link>
-            </div>
+            </>
           )}
-
-          <button
-            className="hamburger-btn"
-            onClick={() => setMenuOpen(!menuOpen)}
-            aria-label="Toggle menu"
-          >
-            &#9776;
-          </button>
         </div>
       </nav>
 
