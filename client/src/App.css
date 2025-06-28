@@ -10,7 +10,7 @@ html, body, #root {
 
 .App {
   text-align: center;
-  min-height: 100vh; /* full viewport height */
+  min-height: 100vh;       /* full viewport height */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -21,142 +21,39 @@ html, body, #root {
   box-sizing: border-box;
 }
 
-/* Navbar Styles */
-.navbar {
-  background: #2c3e50;
-  color: #fff;
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  /* Removed min-height:100vh here to avoid conflict with App container */
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
   align-items: center;
-  padding: 1rem 2rem;
-  flex-wrap: wrap;
-  position: sticky;
-  top: 0;
-  z-index: 100;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+  width: 100%;
+  padding: 2rem 1rem;
+  box-sizing: border-box;
 }
 
-.navbar-left {
-  display: flex;
-  align-items: center;
+.App-link {
+  color: #61dafb;
 }
 
-.nav-logo {
-  font-weight: bold;
-  font-size: 1.2rem;
-  color: #ecf0f1;
-  text-decoration: none;
-  margin-right: 1.5rem;
-}
-
-.nav-links {
-  display: flex;
-  align-items: center;
-}
-
-.nav-links a {
-  margin-right: 1rem;
-  color: #bdc3c7;
-  text-decoration: none;
-  font-weight: 500;
-}
-
-.nav-links a:hover {
-  color: #ecf0f1;
-}
-
-.navbar-right {
-  display: flex;
-  align-items: center;
-}
-
-.greeting {
-  margin-right: 1rem;
-  font-weight: 500;
-}
-
-.btn-logout {
-  background-color: #e74c3c;
-  border: none;
-  color: #fff;
-  padding: 0.4rem 1rem;
-  border-radius: 4px;
-  cursor: pointer;
-  font-weight: 600;
-}
-
-.btn-logout:hover {
-  background-color: #c0392b;
-}
-
-.nav-auth-links a {
-  margin-right: 1rem;
-  color: #bdc3c7;
-  text-decoration: none;
-  font-weight: 500;
-}
-
-.nav-auth-links a:last-child {
-  margin-right: 0;
-}
-
-.nav-auth-links a:hover {
-  color: #ecf0f1;
-}
-
-/* Hamburger button - hidden on desktop */
-.hamburger-btn {
-  display: none;
-  background: none;
-  border: none;
-  color: #ecf0f1;
-  font-size: 1.8rem;
-  cursor: pointer;
-  margin-left: 1rem;
-}
-
-/* MOBILE STYLES */
-@media (max-width: 768px) {
-  .navbar {
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 1rem;
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
   }
-
-  .nav-links,
-  .nav-auth-links {
-    display: none;
-    flex-direction: column;
-    width: 100%;
-  }
-
-  /* Show links when menu open */
-  .nav-links.open,
-  .nav-auth-links.open {
-    display: flex;
-  }
-
-  .nav-links a,
-  .nav-auth-links a {
-    margin: 0.5rem 0;
-    width: 100%;
-    padding-left: 0.5rem;
-  }
-
-  .navbar-left {
-    width: 100%;
-    justify-content: space-between;
-  }
-
-  .hamburger-btn {
-    display: block;
-  }
-
-  .greeting {
-    margin: 0.5rem 0;
-  }
-
-  .btn-logout {
-    margin: 0.5rem 0;
-    width: 100%;
+  to {
+    transform: rotate(360deg);
   }
 }
