@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useLocation, useNavigate, Link } from 'react-router-dom';
+import { Player } from '@lottiefiles/react-lottie-player';  // same as Dashboard
+import wrenchAnimation from '../assets/Wrench.json';
 import './ServicesByCategory.css';
 
 function ServicesByCategory() {
@@ -40,7 +42,29 @@ function ServicesByCategory() {
       });
   }, [category]);
 
-  if (loading) return <p>Loading services for {category}...</p>;
+  if (loading) {
+    return (
+      <div
+        style={{
+          minHeight: '60vh',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center',
+          textAlign: 'center',
+        }}
+      >
+        <Player
+          autoplay
+          loop
+          src={wrenchAnimation}
+          style={{ height: 200, width: 200 }}
+        />
+        <p style={{ marginTop: '1rem' }}>Loading services for "{category}"...</p>
+      </div>
+    );
+  }
+
   if (error) return <p style={{ color: 'red' }}>{error}</p>;
 
   const displayedServices = services.filter(s => s.name !== 'Window Washing');
@@ -49,7 +73,8 @@ function ServicesByCategory() {
     setLoadingSubcat(true);
     try {
       const res = await fetch(
-        `${process.env.REACT_APP_API_BASE_URL}/api/services?category=${encodeURIComponent(category)}&subcategory=${encodeURIComponent(subcatName)}`);
+        `${process.env.REACT_APP_API_BASE_URL}/api/services?category=${encodeURIComponent(category)}&subcategory=${encodeURIComponent(subcatName)}`
+      );
       if (!res.ok) throw new Error('Failed fetching subcategory services');
       const data = await res.json();
 

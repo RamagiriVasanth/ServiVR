@@ -1,5 +1,5 @@
 import React, { createContext, useState, useEffect, useRef } from 'react';
-import { jwtDecode } from 'jwt-decode';
+import { jwtDecode } from 'jwt-decode';  // Named import
 import { toast } from 'react-toastify';
 
 export const AuthContext = createContext();
@@ -59,7 +59,6 @@ const AuthProvider = ({ children }) => {
     decodeAndSetUser(token);
   };
 
-  // ✅ Use backend demo route instead of fake token
   const demoLogin = async () => {
     try {
       const res = await fetch(`${process.env.REACT_APP_API_BASE_URL}/api/auth/demo-login`, {
@@ -69,7 +68,7 @@ const AuthProvider = ({ children }) => {
       const data = await res.json();
 
       if (res.ok) {
-        login(data.token); // Use real token from backend
+        login(data.token);
       } else {
         toast.error(data.msg || '❌ Demo login failed');
       }

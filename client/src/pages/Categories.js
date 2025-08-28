@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Lottie from 'lottie-react';  // Correct import for lottie-react
+import repairAnimation from '../assets/Wrench.json';
 import './Categories.css';
 
 function Categories() {
@@ -31,7 +33,14 @@ function Categories() {
     });
   };
 
-  if (loading) return <p>Loading categories...</p>;
+  if (loading)
+    return (
+      <div className="loading-container">
+        <Lottie animationData={repairAnimation} loop={true} autoplay={true} style={{ height: 200, width: 200 }} />
+        <p>Loading categories...</p>
+      </div>
+    );
+
   if (error) return <p>{error}</p>;
 
   return (

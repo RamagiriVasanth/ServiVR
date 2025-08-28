@@ -20,23 +20,24 @@
   padding: 1.5rem 2rem;
   width: 110px;
   height: 130px; /* fixed height for consistent sizing */
-  transition: background-color 0.3s ease, transform 0.2s ease;
-  box-shadow: 0 4px 8px rgb(0 0 0 / 0.1);
-  user-select: none;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   border: none;
   outline-offset: 3px;
+  user-select: none;
 
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   text-align: center;
+
+  transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 .category-icon:hover,
 .category-icon:focus {
   background-color: #2980b9;
-  color: white;
+  color: #fff;
   transform: scale(1.05);
   outline: none;
   box-shadow: 0 0 0 3px #3498db; /* focus ring */
@@ -51,4 +52,15 @@
 .category-label {
   font-weight: 600;
   font-size: 1.1rem;
+}
+
+/* NEW: Center the loading animation and text */
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 60vh; /* Adjust as needed */
+  text-align: center;
+  gap: 1rem;
 }
