@@ -179,53 +179,47 @@ html, body, #root {
   }
 }
 
-/* === STACKED LAYOUT on ≤480px to avoid overlap === */
-@media (max-width: 480px) {
-  .navbar-wrapper {
-    padding: 0 0.3rem;
-  }
+/* === STACKED LAYOUT TRIGGERED BY JS CLASS === */
+.navbar-wrapper.stacked .navbar {
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0.6rem 1rem;
+  min-height: auto;
+}
 
-  .navbar {
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 0.6rem 1rem;
-    min-height: auto;
-  }
+.navbar-wrapper.stacked .navbar-top {
+  margin: 0 0 0.6rem 0;
+}
 
-  .navbar-top {
-    margin: 0 0 0.6rem 0;
-  }
+.navbar-wrapper.stacked .navbar-bottom {
+  flex-direction: column;
+  gap: 0.6rem;
+  width: 100%;
+}
 
-  .navbar-bottom {
-    flex-direction: column;
-    gap: 0.6rem;
-    width: 100%;
-  }
+.navbar-wrapper.stacked .nav-left,
+.navbar-wrapper.stacked .nav-right {
+  flex-wrap: nowrap;
+  gap: 0.5rem;
+  width: 100%;
+  justify-content: flex-start;
+}
 
-  .nav-left,
-  .nav-right {
-    flex-wrap: nowrap;
-    gap: 0.5rem;
-    width: 100%;
-    justify-content: flex-start;
-  }
+.navbar-wrapper.stacked .nav-link {
+  white-space: normal;
+  padding: 0.35rem 0.6rem;
+  font-size: 0.9rem;
+}
 
-  .nav-link {
-    white-space: normal;
-    padding: 0.35rem 0.6rem;
-    font-size: 0.9rem;
-  }
+.navbar-wrapper.stacked .logout-btn {
+  padding: 0.35rem 1rem;
+  font-size: 0.9rem;
+}
 
-  .logout-btn {
-    padding: 0.35rem 1rem;
-    font-size: 0.9rem;
-  }
-
-  .user-greeting {
-    font-size: 0.9rem;
-    max-width: none;
-    margin-right: 0.5rem;
-  }
+.navbar-wrapper.stacked .user-greeting {
+  font-size: 0.9rem;
+  max-width: none;
+  margin-right: 0.5rem;
 }
 
 /* For very small devices - minor font & padding tweaks */
@@ -242,5 +236,35 @@ html, body, #root {
 
   .user-greeting {
     font-size: 0.85rem;
+  }
+}
+
+/* === Only stack greeting + logout button on small screens === */
+@media (max-width: 600px) {
+  .auth-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.3rem;
+    width: 100%;
+  }
+
+  .user-greeting {
+    order: 1;
+    max-width: none;
+    margin-right: 0;
+  }
+
+  .logout-btn {
+    order: 2;
+    width: 100%;
+  }
+
+  /* Keep login/register buttons horizontal */
+  .nav-right {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem;
   }
 }
