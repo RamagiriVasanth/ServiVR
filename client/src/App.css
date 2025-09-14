@@ -34,11 +34,16 @@ html, body, #root {
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
+  /* Prevent wrapping */
   flex-wrap: nowrap;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
   border-radius: 0 0 8px 8px;
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
+  overflow-x: auto; /* allow scroll only if absolutely necessary */
+  scrollbar-width: none; /* Firefox */
+}
+
+.navbar::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
 }
 
 /* Logo at top */
@@ -48,7 +53,7 @@ html, body, #root {
 }
 
 .nav-logo {
-  color: #f5f7fa;
+  color: #f5f7fa; /* off-white */
   text-decoration: none;
   font-weight: 700;
   font-size: 1.4rem;
@@ -60,12 +65,12 @@ html, body, #root {
 /* Links container beside logo */
 .navbar-bottom {
   display: flex;
-  flex-wrap: nowrap;
+  flex-wrap: nowrap; /* no wrap */
   align-items: center;
-  justify-content: space-between; /* desktop: left & right */
+  justify-content: space-between;
   gap: 1rem;
   flex: 1;
-  overflow-x: auto;
+  min-width: 0; /* important to allow shrinking */
 }
 
 /* Nav links */
@@ -75,21 +80,23 @@ html, body, #root {
   align-items: center;
   flex-wrap: nowrap;
   gap: 1rem;
-  white-space: nowrap;
-  flex-shrink: 0;
+  min-width: 0; /* allow shrinking */
+  flex-shrink: 1;
+  overflow: hidden;
 }
 
 .nav-link {
-  color: #dcdde1;
+  color: #dcdde1; /* light gray */
   text-decoration: none;
   font-weight: 600;
   padding: 0.4rem 0.8rem;
-  transition: color 0.3s ease, border-bottom 0.3s ease;
   white-space: nowrap;
+  transition: color 0.3s ease, border-bottom 0.3s ease;
+  flex-shrink: 1;
 }
 
 .nav-link:hover {
-  color: #16a085;
+  color: #16a085; /* subtle teal accent */
 }
 
 .nav-link.active {
@@ -104,6 +111,10 @@ html, body, #root {
   font-size: 1rem;
   color: #f5f7fa;
   white-space: nowrap;
+  flex-shrink: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 120px;
 }
 
 .logout-btn {
@@ -117,6 +128,7 @@ html, body, #root {
   box-shadow: 0 2px 8px rgba(22, 160, 133, 0.4);
   transition: background-color 0.3s ease, box-shadow 0.3s ease;
   white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .logout-btn:hover,
@@ -126,37 +138,63 @@ html, body, #root {
   box-shadow: 0 4px 12px rgba(19, 141, 117, 0.6);
 }
 
-/* Mobile responsive styles */
-@media (max-width: 600px) {
+/* Responsive adjustments */
+@media (max-width: 800px) {
   .navbar {
-    flex-direction: row !important;
-    flex-wrap: nowrap !important;
-    padding: 0.5rem 1rem;
+    padding: 1rem 1rem;
+  }
+
+  .nav-link {
+    padding: 0.3rem 0.5rem;
+    font-size: 0.9rem;
+  }
+
+  .logout-btn {
+    padding: 0.4rem 1rem;
+    font-size: 0.9rem;
+  }
+
+  .user-greeting {
+    font-size: 0.9rem;
+    max-width: 100px;
   }
 
   .navbar-bottom {
-    justify-content: flex-start !important; /* left align all items */
-    gap: 0.5rem !important;
+    gap: 0.7rem;
   }
 
   .nav-left,
   .nav-right {
-    gap: 0.5rem !important;
+    gap: 0.7rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .navbar {
+    padding: 0.8rem 0.8rem;
   }
 
-  /* Add some left margin to right group so left and right don’t cluster */
-  .nav-right {
-    margin-left: 1rem;
+  .nav-link {
+    padding: 0.25rem 0.4rem;
+    font-size: 0.85rem;
   }
 
-  /* Hide scroll bar but allow scroll */
-  .navbar::-webkit-scrollbar,
-  .navbar-bottom::-webkit-scrollbar {
-    display: none;
+  .logout-btn {
+    padding: 0.3rem 0.8rem;
+    font-size: 0.85rem;
   }
-  .navbar,
+
+  .user-greeting {
+    font-size: 0.85rem;
+    max-width: 80px;
+  }
+
   .navbar-bottom {
-    -ms-overflow-style: none;  /* IE and Edge */
-    scrollbar-width: none;  /* Firefox */
+    gap: 0.4rem;
+  }
+
+  .nav-left,
+  .nav-right {
+    gap: 0.4rem;
   }
 }
