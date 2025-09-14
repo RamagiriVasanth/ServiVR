@@ -13,128 +13,114 @@ import Dashboard from './components/Dashboard';
 
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import './App.css'; // Make sure this is imported
+import './App.css';
 
 function App() {
   const { user, logout } = useContext(AuthContext);
 
-  const activeStyle = {
-    color: '#1abc9c',
-    borderBottom: '2px solid #1abc9c',
-    fontWeight: '600',
-    paddingBottom: '4px',
-    textDecoration: 'none',
-  };
-
-  const navButtonStyle = {
-    color: '#bdc3c7',
-    textDecoration: 'none',
-    fontWeight: '600',
-    padding: '0.4rem 0.8rem',
-  };
-
   return (
     <Router>
-      <nav className="navbar">
-        <div className="navbar-top">
-          <NavLink
-            to="/"
-            end
-            className="nav-logo"
-          >
-            ServiVR
-          </NavLink>
-        </div>
-
-        <div className="navbar-bottom">
-          <div className="nav-left">
-            <NavLink
-              to="/"
-              end
-              className={({ isActive }) =>
-                isActive ? 'nav-link active' : 'nav-link'
-              }
-            >
-              Home
-            </NavLink>
-            <NavLink
-              to="/categories"
-              className={({ isActive }) =>
-                isActive ? 'nav-link active' : 'nav-link'
-              }
-            >
-              Categories
-            </NavLink>
-            {user && (
-              <NavLink
-                to="/dashboard"
-                className={({ isActive }) =>
-                  isActive ? 'nav-link active' : 'nav-link'
-                }
-              >
-                Dashboard
+      <div className="App">
+        {/* ✅ Wrapped navbar in container */}
+        <div className="navbar-wrapper">
+          <nav className="navbar">
+            <div className="navbar-top">
+              <NavLink to="/" end className="nav-logo">
+                ServiVR
               </NavLink>
-            )}
-          </div>
+            </div>
 
-          <div className="nav-right">
-            {user ? (
-              <>
-                <span className="user-greeting">👋 Hi, {user.name}</span>
-                <button onClick={logout} className="logout-btn">
-                  Logout
-                </button>
-              </>
-            ) : (
-              <>
+            <div className="navbar-bottom">
+              <div className="nav-left">
                 <NavLink
-                  to="/register"
+                  to="/"
+                  end
                   className={({ isActive }) =>
                     isActive ? 'nav-link active' : 'nav-link'
                   }
                 >
-                  Register
+                  Home
                 </NavLink>
                 <NavLink
-                  to="/login"
+                  to="/categories"
                   className={({ isActive }) =>
                     isActive ? 'nav-link active' : 'nav-link'
                   }
                 >
-                  Login
+                  Categories
                 </NavLink>
-              </>
-            )}
-          </div>
+                {user && (
+                  <NavLink
+                    to="/dashboard"
+                    className={({ isActive }) =>
+                      isActive ? 'nav-link active' : 'nav-link'
+                    }
+                  >
+                    Dashboard
+                  </NavLink>
+                )}
+              </div>
+
+              <div className="nav-right">
+                {user ? (
+                  <>
+                    <span className="user-greeting">👋 Hi, {user.name}</span>
+                    <button onClick={logout} className="logout-btn">
+                      Logout
+                    </button>
+                  </>
+                ) : (
+                  <>
+                    <NavLink
+                      to="/register"
+                      className={({ isActive }) =>
+                        isActive ? 'nav-link active' : 'nav-link'
+                      }
+                    >
+                      Register
+                    </NavLink>
+                    <NavLink
+                      to="/login"
+                      className={({ isActive }) =>
+                        isActive ? 'nav-link active' : 'nav-link'
+                      }
+                    >
+                      Login
+                    </NavLink>
+                  </>
+                )}
+              </div>
+            </div>
+          </nav>
         </div>
-      </nav>
 
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/categories" element={<Categories />} />
-        <Route path="/services/:category" element={<ServicesByCategory />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/review" element={<Review />} />
-        <Route
-          path="/dashboard"
-          element={
-            <ProtectedRoute>
-              <Dashboard />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="*"
-          element={
-            <h2 style={{ textAlign: 'center', marginTop: '2rem' }}>
-              404 - Page Not Found
-            </h2>
-          }
-        />
-      </Routes>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/categories" element={<Categories />} />
+          <Route path="/services/:category" element={<ServicesByCategory />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/review" element={<Review />} />
+          <Route
+            path="/dashboard"
+            element={
+              <ProtectedRoute>
+                <Dashboard />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="*"
+            element={
+              <h2 style={{ textAlign: 'center', marginTop: '2rem' }}>
+                404 - Page Not Found
+              </h2>
+            }
+          />
+        </Routes>
 
-      <ToastContainer position="top-right" autoClose={3000} />
+        <ToastContainer position="top-right" autoClose={3000} />
+      </div>
     </Router>
   );
 }
