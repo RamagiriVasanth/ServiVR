@@ -21,7 +21,6 @@ function App() {
   return (
     <Router>
       <div className="App">
-        {/* ✅ Wrapped navbar in container */}
         <div className="navbar-wrapper">
           <nav className="navbar">
             <div className="navbar-top">
