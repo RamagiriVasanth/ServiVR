@@ -177,6 +177,21 @@ html, body, #root {
     gap: 0.7rem;
   }
 
+  /* <-- START FIX: prevent Dashboard from being cut off */
+  .nav-left {
+    overflow: visible;  /* Allow full display of links */
+    max-width: 100%;
+    flex-shrink: 0;     /* Prevent shrinking */
+  }
+
+  .nav-link {
+    white-space: nowrap;
+    overflow: visible;
+    text-overflow: clip;
+    flex-shrink: 0;     /* Prevent shrinking of links */
+  }
+  /* <-- END FIX */
+
   .nav-link {
     padding: 0.3rem 0.5rem;
     font-size: 0.9rem;
