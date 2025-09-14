@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef, useState } from 'react';
+import React, { useContext } from 'react';
 import { BrowserRouter as Router, Routes, Route, NavLink } from 'react-router-dom';
 import Register from './components/Register';
 import Login from './components/Login';
@@ -17,43 +17,12 @@ import './App.css';
 
 function App() {
   const { user, logout } = useContext(AuthContext);
-  const [stacked, setStacked] = useState(false);
-
-  const navbarRef = useRef(null);
-  const registerRef = useRef(null);
-  const categoriesRef = useRef(null);
-
-  const checkOverlap = () => {
-    if (!navbarRef.current || !registerRef.current || !categoriesRef.current) return;
-
-    const registerRect = registerRef.current.getBoundingClientRect();
-    const categoriesRect = categoriesRef.current.getBoundingClientRect();
-
-    if (registerRect.left < categoriesRect.right + 8) {
-      setStacked(true);
-    } else {
-      setStacked(false);
-    }
-  };
-
-  useEffect(() => {
-    const timeoutId = setTimeout(() => {
-      checkOverlap();
-    }, 50);
-
-    window.addEventListener('resize', checkOverlap);
-
-    return () => {
-      clearTimeout(timeoutId);
-      window.removeEventListener('resize', checkOverlap);
-    };
-  }, []);
 
   return (
     <Router>
       <div className="App">
-        <div className={`navbar-wrapper ${stacked ? 'stacked' : ''}`}>
-          <nav className="navbar" ref={navbarRef}>
+        <div className="navbar-wrapper">
+          <nav className="navbar">
             <div className="navbar-top">
               <NavLink to="/" end className="nav-logo">
                 ServiVR
@@ -61,7 +30,7 @@ function App() {
             </div>
 
             <div className="navbar-bottom">
-              <div className="nav-left" ref={categoriesRef}>
+              <div className="nav-left">
                 <NavLink
                   to="/"
                   end
@@ -91,7 +60,7 @@ function App() {
                 )}
               </div>
 
-              <div className="nav-right" ref={registerRef}>
+              <div className="nav-right">
                 {user ? (
                   <div className="auth-info">
                     <span className="user-greeting">👋 Hi, {user.name}</span>
