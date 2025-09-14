@@ -1,9 +1,9 @@
 /* Home Page Styles */
 .home-container {
-  width: 100vw;           /* full viewport width */
-  margin: 0;              /* no margin */
-  padding: 2rem 1rem;     /* padding inside */
-  box-sizing: border-box; /* include padding in width */
+  width: 100vw;
+  margin: 0;
+  padding: 2rem 1rem;
+  box-sizing: border-box;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   background-color: #f9fafb;
   color: #333;
@@ -42,18 +42,51 @@
   background-color: #0056b3;
 }
 
-/* Search input */
+/* Modern Search Input */
 .search-input {
   display: block;
   width: 100%;
   max-width: 500px;
   margin: 2rem auto 2rem auto;
-  padding: 0.75rem 1rem;
-  border-radius: 6px;
-  border: 1px solid #ccc;
-  font-size: 1rem;
+  padding: 0.85rem 1.5rem;
+  font-size: 1.1rem;
+  border-radius: 30px;
+  border: 2px solid transparent;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  outline-offset: 2px;
+  transition:
+    box-shadow 0.3s ease,
+    border-color 0.3s ease,
+    background-color 0.3s ease;
+  background-color: white;
+  color: #333;
+  font-weight: 500;
+  font-family: inherit;
+  user-select: text;
 }
 
+.search-input::placeholder {
+  color: #bbb;
+  font-style: italic;
+}
+
+.search-input:focus {
+  border-color: #2980b9;
+  box-shadow: 0 4px 12px rgba(41, 128, 185, 0.4);
+  background-color: #f0f8ff;
+  color: #2c3e50;
+}
+
+/* Responsive Search input */
+@media (max-width: 700px) {
+  .search-input {
+    max-width: 90%;
+    font-size: 1rem;
+    padding: 0.7rem 1.2rem;
+  }
+}
+
+/* HR separator */
 hr {
   border: none;
   border-top: 1px solid #ddd;
@@ -265,12 +298,12 @@ section h2 {
   color: #555;
 }
 
-/* Connecting arrows between steps */
+/* Connecting arrows between steps - desktop: right arrows */
 .steps-flow .step:not(:last-child)::after {
   content: "→";
   position: absolute;
   top: 50%;
-  right: -15px;
+  right: -25px;
   transform: translateY(-50%);
   font-size: 2rem;
   color: #2980b9;
@@ -278,16 +311,29 @@ section h2 {
   user-select: none;
 }
 
+/* Mobile layout */
 @media (max-width: 700px) {
   .steps-flow {
     flex-direction: column;
+    align-items: center;
   }
   .steps-flow .step {
-    min-width: 100%;
-    margin-bottom: 1.5rem;
+    min-width: 90%;
+    margin-bottom: 2rem;
   }
+  
+  /* Change arrows to down arrows below each step except last */
   .steps-flow .step:not(:last-child)::after {
-    content: "";
+    content: "↓";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    right: auto;
+    font-size: 2rem;
+    color: #2980b9;
+    font-weight: bold;
+    user-select: none;
+    margin-top: 0.5rem;
   }
 }
-

@@ -1,12 +1,12 @@
 import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
-import { toast } from 'react-toastify';  // Import toast for styled alerts
-import './Login.css'; // Importing CSS styles
+import { toast } from 'react-toastify';
+import './Login.css';
 
 const Login = () => {
   const { login, demoLogin } = useContext(AuthContext);
-  const navigate = useNavigate(); // Hook for navigation
+  const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
     email: '',
@@ -24,87 +24,65 @@ const Login = () => {
     try {
       const res = await fetch(`${process.env.REACT_APP_API_BASE_URL}/api/auth/login`, {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData)
       });
 
       const data = await res.json();
 
       if (res.ok) {
-        login(data.token); // AuthContext will show toast for success
-        navigate('/'); // Redirect to home
+        login(data.token);
+        navigate('/');
       } else {
-        toast.error(data.msg || '❌ Login failed'); // Styled error toast
+        toast.error(data.msg || '❌ Login failed');
       }
     } catch (err) {
       console.error(err);
-      toast.error('❌ Error during login'); // Styled error toast
+      toast.error('❌ Error during login');
     }
   };
 
-  // Handler for demo login
   const handleDemoLogin = () => {
-    demoLogin(); // AuthContext will show toast for demo login success
-    navigate('/'); // Redirect to home after demo login
+    demoLogin();
+    navigate('/');
   };
 
   return (
-    <form onSubmit={onSubmit} className="login-form">
-      <h2>Login</h2>
-      <input
-        type="email"
-        name="email"
-        placeholder="Email"
-        value={email}
-        onChange={onChange}
-        required
-      />
-      <input
-        type="password"
-        name="password"
-        placeholder="Password"
-        value={password}
-        onChange={onChange}
-        required
-      />
-      <button type="submit">Login</button>
+    <div className="login-container">
+      <form onSubmit={onSubmit} className="login-form">
+        <h2>Login</h2>
 
-      {/* OR separator */}
-      <div
-        style={{
-          textAlign: 'center',
-          margin: '1rem 0',
-          fontWeight: 'bold',
-          color: '#888',
-        }}
-      >
-        or
-      </div>
+        <input
+          type="email"
+          name="email"
+          placeholder="Email"
+          value={email}
+          onChange={onChange}
+          required
+        />
 
-      {/* Demo Login button */}
-      <button
-        type="button"
-        onClick={handleDemoLogin}
-        style={{ backgroundColor: '#555', color: 'white', width: '100%' }}
-      >
-        Demo Login
-      </button>
+        <input
+          type="password"
+          name="password"
+          placeholder="Password"
+          value={password}
+          onChange={onChange}
+          required
+        />
 
-      {/* Caption below demo login button */}
-      <p
-        style={{
-          marginTop: '1rem',
-          fontStyle: 'italic',
-          color: '#666',
-          textAlign: 'center',
-          fontSize: '0.9rem',
-        }}
-      >
-        No credentials needed for demo login.
-      </p>
-    </form>
+        <button type="submit" className="login-button">Login</button>
+
+        <div className="or-separator">or</div>
+
+        <button type="button" className="demo-button" onClick={handleDemoLogin}>
+          Demo Login
+        </button>
+
+        <p className="demo-caption">
+          No credentials needed for demo login.
+        </p>
+      </form>
+    </div>
   );
 };
 

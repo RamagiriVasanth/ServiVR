@@ -1,27 +1,39 @@
-.login-form {
-  max-width: 400px;
-  margin: 100px auto;
+/* Container to center the form */
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 80vh;
+  background-color: #f9fafb;
   padding: 2rem;
-  background-color: #f9f9f9;
-  border-radius: 12px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
 }
 
+/* Login form styling */
+.login-form {
+  background-color: #fff;
+  padding: 2.5rem;
+  border-radius: 10px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+  max-width: 400px;
+  width: 100%;
+}
+
+/* Heading */
 .login-form h2 {
   text-align: center;
   margin-bottom: 1.5rem;
-  color: #333;
+  color: #2c3e50;
+  font-size: 1.8rem;
 }
 
+/* Input fields */
 .login-form input {
-  display: block;
   width: 100%;
-  padding: 12px;
-  margin-bottom: 1rem;
+  padding: 0.75rem;
+  margin: 0.6rem 0;
   border: 1px solid #ccc;
-  border-radius: 8px;
+  border-radius: 6px;
   font-size: 1rem;
-  transition: border 0.2s;
 }
 
 .login-form input:focus {
@@ -29,18 +41,54 @@
   outline: none;
 }
 
-.login-form button {
+/* Main login button */
+.login-button {
   width: 100%;
-  padding: 12px;
+  padding: 0.8rem;
   background-color: #007bff;
   color: white;
   border: none;
-  border-radius: 8px;
-  font-size: 1rem;
+  border-radius: 6px;
+  font-size: 1.1rem;
+  margin-top: 1rem;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
 
-.login-form button:hover {
+.login-button:hover {
   background-color: #0056b3;
+}
+
+/* Separator */
+.or-separator {
+  text-align: center;
+  margin: 1rem 0;
+  font-weight: bold;
+  color: #888;
+}
+
+/* Demo login button */
+.demo-button {
+  width: 100%;
+  padding: 0.8rem;
+  background-color: #555;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.demo-button:hover {
+  background-color: #444;
+}
+
+/* Caption under demo button */
+.demo-caption {
+  margin-top: 1rem;
+  font-style: italic;
+  color: #666;
+  text-align: center;
+  font-size: 0.9rem;
 }

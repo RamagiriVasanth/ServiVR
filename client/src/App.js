@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, NavLink } from 'react-router-dom';
 import Register from './components/Register';
 import Login from './components/Login';
 import ProtectedRoute from './components/ProtectedRoute';
@@ -13,89 +13,99 @@ import Dashboard from './components/Dashboard';
 
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import './App.css'; // Make sure this is imported
 
 function App() {
   const { user, logout } = useContext(AuthContext);
 
+  const activeStyle = {
+    color: '#1abc9c',
+    borderBottom: '2px solid #1abc9c',
+    fontWeight: '600',
+    paddingBottom: '4px',
+    textDecoration: 'none',
+  };
+
+  const navButtonStyle = {
+    color: '#bdc3c7',
+    textDecoration: 'none',
+    fontWeight: '600',
+    padding: '0.4rem 0.8rem',
+  };
+
   return (
     <Router>
-      <nav
-        style={{
-          padding: '1rem 2rem',
-          background: '#2c3e50',
-          color: '#fff',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          flexWrap: 'wrap',
-        }}
-      >
-        <div>
-          <Link
+      <nav className="navbar">
+        <div className="navbar-top">
+          <NavLink
             to="/"
-            style={{
-              marginRight: '1.5rem',
-              color: '#ecf0f1',
-              textDecoration: 'none',
-              fontWeight: 'bold',
-              fontSize: '1.2rem',
-            }}
+            end
+            className="nav-logo"
           >
             ServiVR
-          </Link>
-          <Link
-            to="/"
-            style={{ marginRight: '1rem', color: '#bdc3c7', textDecoration: 'none' }}
-          >
-            Home
-          </Link>
-          <Link
-            to="/categories"
-            style={{ marginRight: '1rem', color: '#bdc3c7', textDecoration: 'none' }}
-          >
-            Categories
-          </Link>
-          {user && (
-            <Link
-              to="/dashboard"
-              style={{ marginRight: '1rem', color: '#bdc3c7', textDecoration: 'none' }}
-            >
-              Dashboard
-            </Link>
-          )}
+          </NavLink>
         </div>
 
-        <div>
-          {user ? (
-            <>
-              <span style={{ marginRight: '1rem' }}>👋 Hi, {user.name}</span>
-              <button
-                onClick={logout}
-                style={{
-                  backgroundColor: '#e74c3c',
-                  border: 'none',
-                  color: '#fff',
-                  padding: '0.4rem 1rem',
-                  borderRadius: '4px',
-                  cursor: 'pointer',
-                }}
+        <div className="navbar-bottom">
+          <div className="nav-left">
+            <NavLink
+              to="/"
+              end
+              className={({ isActive }) =>
+                isActive ? 'nav-link active' : 'nav-link'
+              }
+            >
+              Home
+            </NavLink>
+            <NavLink
+              to="/categories"
+              className={({ isActive }) =>
+                isActive ? 'nav-link active' : 'nav-link'
+              }
+            >
+              Categories
+            </NavLink>
+            {user && (
+              <NavLink
+                to="/dashboard"
+                className={({ isActive }) =>
+                  isActive ? 'nav-link active' : 'nav-link'
+                }
               >
-                Logout
-              </button>
-            </>
-          ) : (
-            <>
-              <Link
-                to="/register"
-                style={{ marginRight: '1rem', color: '#bdc3c7', textDecoration: 'none' }}
-              >
-                Register
-              </Link>
-              <Link to="/login" style={{ color: '#bdc3c7', textDecoration: 'none' }}>
-                Login
-              </Link>
-            </>
-          )}
+                Dashboard
+              </NavLink>
+            )}
+          </div>
+
+          <div className="nav-right">
+            {user ? (
+              <>
+                <span className="user-greeting">👋 Hi, {user.name}</span>
+                <button onClick={logout} className="logout-btn">
+                  Logout
+                </button>
+              </>
+            ) : (
+              <>
+                <NavLink
+                  to="/register"
+                  className={({ isActive }) =>
+                    isActive ? 'nav-link active' : 'nav-link'
+                  }
+                >
+                  Register
+                </NavLink>
+                <NavLink
+                  to="/login"
+                  className={({ isActive }) =>
+                    isActive ? 'nav-link active' : 'nav-link'
+                  }
+                >
+                  Login
+                </NavLink>
+              </>
+            )}
+          </div>
         </div>
       </nav>
 
@@ -116,7 +126,11 @@ function App() {
         />
         <Route
           path="*"
-          element={<h2 style={{ textAlign: 'center', marginTop: '2rem' }}>404 - Page Not Found</h2>}
+          element={
+            <h2 style={{ textAlign: 'center', marginTop: '2rem' }}>
+              404 - Page Not Found
+            </h2>
+          }
         />
       </Routes>
 
